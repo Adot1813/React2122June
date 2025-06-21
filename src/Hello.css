@@ -1,0 +1,17 @@
+h1{
+color: rgb(167, 0, 0);
+}
+h1:hover{
+    font-size: 40px;
+    background-color:darkmagenta;
+    color :blue
+}
+img{
+ border:solid rgb(170, 90, 245) 5px;
+  border-radius:border-radius: 200px 200px 200px 200px;
+-webkit-border-radius: 200px 200px 200px 200px;
+-moz-border-radius: 200px 200px 200px 200px;
+border: 55px groove rgba(164,19,48,0.88);
+ /*dotted  ashed double*/
+  /*groove*/
+}
