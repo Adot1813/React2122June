@@ -1,0 +1,242 @@
+/* style.css */
+
+/* --- General RGB Horror Theme --- */
+body {
+    font-family: 'Creepster', 'Metal Mania', 'Nosifier', 'Press Start 2P', cursive, monospace, sans-serif; /* Fonts for horror/pixelated feel */
+    background-color: #050000; /* Extremely dark red/black for deep gloom */
+    color: #e0e0e0; /* Off-white for general text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Hide scrollbars, crucial for full-screen effects */
+    text-shadow: 0 0 3px rgba(255, 0, 0, 0.4); /* Subtle red text glow */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" stroke="%23ff0000" stroke-width="2" fill="none"/><path d="M16 4 L16 28 M4 16 L28 16" stroke="%23ff0000" stroke-width="2" fill="none"/></svg>') 16 16, auto; /* Custom creepy crosshair cursor */
+}
+
+#root {
+    background-color: #1a0a0a; /* Dark, blood-like container background */
+    border: 2px solid rgb(139, 0, 0); /* Primary blood-red border */
+    padding: 30px;
+    border-radius: 8px; /* Slightly sharp corners */
+    box-shadow: 
+        0 0 20px rgba(255, 0, 0, 0.7), /* Intense red glow */
+        0 0 30px rgba(0, 255, 0, 0.5), /* Green glow */
+        0 0 40px rgba(0, 0, 255, 0.3); /* Blue glow */
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    position: relative;
+    z-index: 1;
+    overflow: hidden; /* Hide overflow from inner elements if any glitch effect extends */
+
+    /* CRT/Glitch Overlay */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 255, 0, 0.05),
+            rgba(0, 255, 0, 0.05) 1px,
+            transparent 1px,
+            transparent 3px
+        ); /* Subtle green scanlines */
+        pointer-events: none;
+        z-index: 2;
+        animation: scanlinesFlicker 5s infinite linear; /* Slow scanline flicker */
+    }
+}
+
+/* Headings */
+h1 {
+    color: rgb(255, 50, 50); /* Vivid red for headings */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    font-size: 2.5em;
+    text-shadow: 
+        0 0 5px rgba(255, 0, 0, 0.9),
+        0 0 10px rgba(0, 255, 0, 0.7),
+        0 0 15px rgba(0, 0, 255, 0.5); /* Layered RGB text glow */
+    animation: textFlicker 1.5s infinite alternate; /* Subtle flicker effect */
+}
+
+/* Input Fields */
+input[type="text"], 
+input[type="number"] {
+    background-color: #2a0a0a; /* Darker input background */
+    color: rgb(200, 255, 200); /* Greenish text for input */
+    border: 1px solid rgb(170, 0, 0); /* Red border */
+    padding: 12px;
+    margin: 8px 0 18px 0;
+    border-radius: 3px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.1em;
+    box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.3), 0 0 5px rgba(0, 255, 0, 0.2); /* Inner and outer glow */
+}
+
+input[type="text"]::placeholder, 
+input[type="number"]::placeholder {
+    color: #a0a0a0;
+}
+
+/* Button */
+button {
+    background-color: rgb(139, 0, 0); /* Blood red button */
+    color: #e0e0e0;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+    box-shadow: 
+        0 0 12px rgba(255, 0, 0, 0.6),
+        0 0 8px rgba(0, 255, 0, 0.4); /* Button RGB glow */
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: rgb(170, 0, 0); /* Lighter red on hover */
+    box-shadow: 
+        0 0 20px rgba(255, 50, 50, 0.9),
+        0 0 15px rgba(50, 255, 50, 0.7);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 0 5px rgba(255, 0, 0, 0.5),
+        0 0 3px rgba(0, 255, 0, 0.3);
+}
+
+/* BMI Output Text (BmiText component) */
+.BmiTextContainer { /* Add a class to your BmiText's outer div/fragment for better targeting */
+    margin-top: 25px;
+    display: block;
+}
+
+.BmiTextContainer h1 {
+    font-size: 2.2em;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: rgb(139, 0, 0); /* Default for categories */
+    text-shadow: 
+        0 0 4px rgba(255, 0, 0, 0.8),
+        0 0 8px rgba(0, 0, 255, 0.4);
+}
+
+/* Specific BMI category styling */
+.BmiTextContainer h1:first-of-type { 
+    font-size: 2.2em;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* "Normal" - sickly green */
+.BmiTextContainer h1:has(+ img[alt="Normal"]) {
+    color: rgb(100, 255, 100); /* Bright, sickly green */
+    text-shadow: 
+        0 0 6px rgb(100, 255, 100),
+        0 0 12px rgba(0, 255, 0, 0.7);
+    animation: glitchEffect 0.8s infinite alternate; /* Glitch effect */
+}
+
+/* "Underweight" - dark, almost black red */
+.BmiTextContainer h1:has(+ img[alt="Underweight"]) {
+    color: rgb(80, 0, 0); 
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+/* "Overweight" - burnt orange/brown with red hint */
+.BmiTextContainer h1:has(+ img[alt="Overweight"]) {
+    color: rgb(200, 80, 0); 
+    text-shadow: 0 0 5px rgba(255, 100, 0, 0.6);
+}
+
+/* "Obesity" - very dark, foreboding red */
+.BmiTextContainer h1:has(+ img[alt="Obesity"]) {
+    color: rgb(60, 0, 0); 
+    text-shadow: 0 0 6px rgba(255, 0, 0, 0.9);
+}
+
+/* Image Styling */
+.BmiTextContainer img {
+    width: 280px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    border: 4px solid rgb(100, 0, 0); /* Thicker, darker red border */
+    border-radius: 3px;
+    box-shadow: 
+        0 0 15px rgba(255, 0, 0, 0.5), 
+        0 0 25px rgba(0, 255, 0, 0.3),
+        0 0 35px rgba(0, 0, 255, 0.2); /* Image RGB glow */
+    filter: grayscale(70%) brightness(70%) contrast(1.1); /* Desaturate and darken */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.BmiTextContainer img:hover {
+    transform: scale(1.05);
+    filter: grayscale(30%) brightness(90%) contrast(1.2);
+}
+
+/* --- Glitch/Flicker Animations --- */
+@keyframes textFlicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 5px rgba(255, 0, 0, 0.9); }
+    50% { opacity: 0.95; text-shadow: 0 0 8px rgba(0, 255, 0, 0.7), 0 0 12px rgba(0, 0, 255, 0.5); }
+    52% { opacity: 1; text-shadow: 0 0 5px rgba(255, 0, 0, 0.9); }
+}
+
+@keyframes glitchEffect {
+    0% { transform: translate(0); text-shadow: 0 0 6px rgb(100, 255, 100); }
+    20% { transform: translate(-2px, 2px); text-shadow: 0 0 8px rgba(0, 255, 0, 0.8), 0 0 1px rgba(255, 0, 0, 0.5); }
+    40% { transform: translate(2px, -2px); text-shadow: 0 0 8px rgba(0, 255, 0, 0.8), 0 0 1px rgba(0, 0, 255, 0.5); }
+    60% { transform: translate(-1px, 1px); text-shadow: 0 0 6px rgb(100, 255, 100); }
+    80% { transform: translate(1px, -1px); text-shadow: 0 0 8px rgba(0, 255, 0, 0.8); }
+    100% { transform: translate(0); text-shadow: 0 0 6px rgb(100, 255, 100); }
+}
+
+@keyframes scanlinesFlicker {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.25; }
+}
+
+/* --- Jump Scare Overlay --- */
+#jumpscare-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Almost black, slightly transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* On top of everything */
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hidden by default */
+    transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out; /* Quick transition */
+}
+
+#jumpscare-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#jumpscare-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    filter: brightness(1.2) contrast(1.5) saturate(1.5); /* Make it pop */
+}
